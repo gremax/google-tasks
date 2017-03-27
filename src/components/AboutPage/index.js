@@ -1,8 +1,12 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
+
 
 const AboutPage = () => (
   <div>
-    <h1>About</h1>
+    <Paper>
+      <h1>About</h1>
+    </Paper>
   </div>
 )
 

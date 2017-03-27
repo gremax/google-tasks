@@ -22,7 +22,13 @@ class SigninPage extends Component {
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.isSignedIn) {
-      this.context.router.replace('/about');
+      const { location } = this.props
+
+      if (location.state && location.state.nextPathname) {
+        this.context.router.replace(location.state.nextPathname);
+      } else {
+        this.context.router.replace('/projects');
+      }
     }
   }
 
