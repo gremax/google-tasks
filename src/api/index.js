@@ -1,11 +1,11 @@
-const CLIENT_ID = "238659955045-p41065ed9vr6jhbq549nqebjgq1ganfo.apps.googleusercontent.com";
+const CLIENT_ID = '238659955045-p41065ed9vr6jhbq549nqebjgq1ganfo.apps.googleusercontent.com'
 const SCOPE = [
-  "https://www.googleapis.com/auth/tasks",
+  'https://www.googleapis.com/auth/tasks',
   'https://www.googleapis.com/auth/plus.me'
-];
+]
 
 export default {
-  authorize(params) {
+  authorize (params) {
     return new Promise((resolve, reject) => {
       gapi.auth.authorize(
         {
@@ -16,12 +16,12 @@ export default {
         },
         result => {
           if (result.error) {
-            return reject(result.error);
+            return reject(result.error)
           }
 
-          return gapi.client.load('tasks', 'v1', () => gapi.client.load('plus', 'v1', () => resolve()));
+          return gapi.client.load('tasks', 'v1', () => gapi.client.load('plus', 'v1', () => resolve()))
         }
-      );
-    });
+      )
+    })
   }
 }

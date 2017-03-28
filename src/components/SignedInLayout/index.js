@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class SignedInLayout extends Component {
-  render() {
+  render () {
     return (
-      <div className="SignedInLayout">
+      <div className='SignedInLayout'>
         {this.props.children}
       </div>
-    );
+    )
   }
 }
 
-export default SignedInLayout;
+export default SignedInLayout

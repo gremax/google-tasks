@@ -1,6 +1,5 @@
-import React from 'react';
-import Paper from 'material-ui/Paper';
-
+import React from 'react'
+import Paper from 'material-ui/Paper'
 
 const AboutPage = () => (
   <div>
@@ -10,4 +9,4 @@ const AboutPage = () => (
   </div>
 )
 
-export default AboutPage;
+export default AboutPage

@@ -1,12 +1,12 @@
-import React          from 'react';
-import ReactDOM       from 'react-dom';
-import api            from './api';
-import App            from './components/App';
-import AboutPage      from './components/AboutPage';
-import SigninPage     from './components/SigninPage';
-import SignedInLayout from './components/SignedInLayout';
-import SessionActions from './actions/SessionActions';
-import SessionStore   from './stores/SessionStore';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import api from './api'
+import App from './components/App'
+import AboutPage from './components/AboutPage'
+import SigninPage from './components/SigninPage'
+import SignedInLayout from './components/SignedInLayout'
+import SessionActions from './actions/SessionActions'
+import SessionStore from './stores/SessionStore'
 import {
   Router,
   Route,
@@ -14,24 +14,24 @@ import {
 } from 'react-router'
 
 window.handleGoogleApiLoaded = () => {
-  SessionActions.authorize(true, renderApp);
+  SessionActions.authorize(true, renderApp)
 }
 
-function renderApp() {
+function renderApp () {
   ReactDOM.render(
     <Router history={hashHistory}>
-      <Route path="/" component={App}>
-        <Route path="/signin" component={SigninPage} />
+      <Route path='/' component={App}>
+        <Route path='/signin' component={SigninPage} />
         <Route component={SignedInLayout} onEnter={requireAuth} >
-          <Route path="/about" component={AboutPage} />
+          <Route path='/about' component={AboutPage} />
         </Route>
       </Route>
     </Router>,
     document.getElementById('root')
-  );
+  )
 }
 
-function requireAuth(nextState, replace) {
+function requireAuth (nextState, replace) {
   if (!SessionStore.isSignedIn()) {
     replace({
       pathname: '/signin',
