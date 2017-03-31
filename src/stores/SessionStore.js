@@ -33,11 +33,13 @@ AppDispatcher.register(action => {
       SessionStore.emitChange()
       break
     }
+
     case AppConstants.SESSION_AUTHORIZE_ERROR: {
       _isSignedIn = false
       SessionStore.emitChange()
       break
     }
+
     default: {
     }
   }

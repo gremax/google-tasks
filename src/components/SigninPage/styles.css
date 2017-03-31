@@ -1,0 +1,17 @@
+.SigninPage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  color: #fff;
+  background-color: #00BCD4;
+}
+.SigninPage__text {
+  height: 100%;
+  vertical-align: center;
+}
+.SigninPage__banner {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

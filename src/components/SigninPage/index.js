@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import SessionActions from '../../actions/SessionActions'
 import SessionStore from '../../stores/SessionStore'
+import './styles.css'
 
 function getFluxState () {
   return {
@@ -12,23 +13,21 @@ function getFluxState () {
 class SigninPage extends Component {
   constructor () {
     super()
-    getFluxState()
+    this.state = getFluxState()
     this._onChange = this._onChange.bind(this)
   }
 
   componentDidMount () {
     SessionStore.addChangeListener(this._onChange)
+
+    if (this.state.isSignedIn) {
+      this.redirectSignedInUser()
+    }
   }
 
   componentWillUpdate (nextProps, nextState) {
     if (nextState.isSignedIn) {
-      const { location } = this.props
-
-      if (location.state && location.state.nextPathname) {
-        this.context.router.replace(location.state.nextPathname)
-      } else {
-        this.context.router.replace('/projects')
-      }
+      this.redirectSignedInUser()
     }
   }
 
@@ -40,13 +39,24 @@ class SigninPage extends Component {
     SessionActions.authorize()
   }
 
+  redirectSignedInUser () {
+    const { location } = this.props
+
+    if (location.state && location.state.nextPathname) {
+      this.context.router.replace(location.state.nextPathname)
+    } else {
+      this.context.router.replace('/lists')
+    }
+  }
+
   render () {
     return (
       <div className='SigninPage'>
-        <div className='SigninPage-banner'>
-          <div className='SigninPage-text'>
+        <div className='SigninPage__banner'>
+          <div className='SigninPage__text'>
             <h1>Simple TODO</h1>
-            <RaisedButton label='Sign in'
+            <RaisedButton
+              label='Sign in'
               className='signin-button'
               onClick={this.handleSignIn}
             />

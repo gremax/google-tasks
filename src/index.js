@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import api from './api'
 import App from './components/App'
 import AboutPage from './components/AboutPage'
+import TaskListsPage from './components/TaskListsPage'
 import SigninPage from './components/SigninPage'
 import SignedInLayout from './components/SignedInLayout'
 import SessionActions from './actions/SessionActions'
@@ -24,6 +25,7 @@ function renderApp () {
         <Route path='/signin' component={SigninPage} />
         <Route component={SignedInLayout} onEnter={requireAuth} >
           <Route path='/about' component={AboutPage} />
+          <Route path='/lists' component={TaskListsPage} />
         </Route>
       </Route>
     </Router>,
