@@ -18,6 +18,22 @@ const TaskListsActions = {
           error: error
         })
       })
+  },
+
+  createTaskList (params) {
+    api.insertTaskList({ title: params.name })
+      .then(data => {
+        AppDispatcher.dispatch({
+          type: AppConstants.TASK_LIST_CREATE_SUCCESS,
+          taskList: data
+        })
+      })
+      .catch(error => {
+        AppDispatcher.dispatch({
+          type: AppConstants.TASK_LIST_CREATE_FAIL,
+          error: error
+        })
+      })
   }
 }
 

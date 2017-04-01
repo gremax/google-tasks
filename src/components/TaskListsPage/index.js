@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TaskListsStore from '../../stores/TaskListsStore'
 import TaskListsActions from '../../actions/TaskListsActions'
+import TaskListModal from '../TaskListModal'
 
 import { List, ListItem } from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
@@ -23,10 +24,36 @@ class TaskListsPage extends Component {
   constructor () {
     super()
     this.state = getStateFromFlux()
+    this._onChange = this._onChange.bind(this)
+    this.handleAddTaskList = this.handleAddTaskList.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.handleTaskListSubmit = this.handleTaskListSubmit.bind(this)
   }
 
   componentWillMount () {
+    this.setState({ isTaskListModal: false })
     TaskListsActions.loadTaskLists()
+  }
+
+  componentDidMount () {
+    TaskListsStore.addChangeListener(this._onChange)
+  }
+
+  componentWillUnmount () {
+    TaskListsStore.removeChangeListener(this._onChange)
+  }
+
+  handleAddTaskList () {
+    this.setState({ isTaskListModal: true })
+  }
+
+  handleClose () {
+    this.setState({ isTaskListModal: false })
+  }
+
+  handleTaskListSubmit (taskList) {
+    TaskListsActions.createTaskList(taskList)
+    this.setState({ isTaskListModal: false })
   }
 
   render () {
@@ -59,9 +86,15 @@ class TaskListsPage extends Component {
                     primaryText={list.name}
                     leftIcon={<FolderIcon />}
                     key={list.id}
+                    onClick={router.push.bind(null, `/lists/${list.id}`)}
                   />
                 )
               }
+              <ListItem
+                primaryText='Create new list'
+                leftIcon={<AddIcon />}
+                onClick={this.handleAddTaskList}
+              />
             </List>
             <Divider />
             <List className='TasklistsPage__list'>
@@ -75,8 +108,17 @@ class TaskListsPage extends Component {
         <div className='TasklistsPage__tasks'>
           {this.props.children}
         </div>
+        <TaskListModal
+          isOpen={this.state.isTaskListModal}
+          onSubmit={this.handleTaskListSubmit}
+          onClose={this.handleClose}
+        />
       </div>
     )
+  }
+
+  _onChange () {
+    this.setState(getStateFromFlux())
   }
 }
 
