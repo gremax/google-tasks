@@ -51,5 +51,18 @@ export default {
     return new Promise((resolve, reject) => {
       request.execute(response => resolve(response))
     })
+  },
+
+  updateTask ({ taskListId, taskId, ...params }) {
+    const request = gapi.client.tasks.tasks.update({
+      tasklist: taskListId,
+      task: taskId,
+      id: taskId,
+      ...params
+    })
+
+    return new Promise((resolve, reject) => {
+      request.execute(response => resolve(response))
+    })
   }
 }

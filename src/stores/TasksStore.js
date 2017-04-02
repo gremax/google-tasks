@@ -53,6 +53,14 @@ AppDispatcher.register(function (action) {
       break
     }
 
+    case AppConstants.TASK_UPDATE_SUCCESS: {
+      const updatedTaskIndex = _tasks.findIndex(task => task.id === action.taskId)
+      _tasks[updatedTaskIndex] = formatTask(action.task)
+
+      TasksStore.emitChange()
+      break
+    }
+
     default: {
     }
   }

@@ -21,6 +21,7 @@ class TasksPage extends Component {
     super()
     this.state = getStateFromFlux()
     this._onChange = this._onChange.bind(this)
+    this.handleStatusChange = this.handleStatusChange.bind(this)
   }
 
   componentWillMount () {
@@ -39,6 +40,14 @@ class TasksPage extends Component {
 
   componentWillUnmount () {
     TasksStore.removeChangeListener(this._onChange)
+  }
+
+  handleStatusChange (taskId, { isCompleted }) {
+    TasksActions.updateTaskStatus({
+      taskListId: this.props.params.id,
+      taskId: taskId,
+      isCompleted: isCompleted
+    })
   }
 
   render () {
@@ -61,6 +70,7 @@ class TasksPage extends Component {
                   key={task.id}
                   text={task.text}
                   isCompleted={task.isCompleted}
+                  onStatusChange={this.handleStatusChange.bind(null, task.id)}
                 />
               )
             }

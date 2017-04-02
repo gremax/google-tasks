@@ -19,6 +19,27 @@ const TasksActions = {
           error: error
         })
       })
+  },
+
+  updateTaskStatus (params) {
+    api.updateTask({
+      taskListId: params.taskListId,
+      taskId: params.taskId,
+      status: params.isCompleted ? 'completed' : 'needsAction'
+    })
+      .then(data => {
+        AppDispatcher.dispatch({
+          type: AppConstants.TASK_UPDATE_SUCCESS,
+          task: data,
+          taskId: params.taskId
+        })
+      })
+      .catch(error => {
+        AppDispatcher.dispatch({
+          type: AppConstants.TASK_UPDATE_FAIL,
+          error: error
+        })
+      })
   }
 }
 
