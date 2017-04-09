@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import TasksStore from '../../stores/TasksStore'
 import TasksActions from '../../actions/TasksActions'
 import Task from '../Task'
-// import TaskListModal from '../TaskListModal'
+import TaskModal from '../TaskModal'
 
 import AddIcon from 'material-ui/svg-icons/content/add'
 import IconButton from 'material-ui/IconButton'
@@ -19,9 +19,12 @@ function getStateFromFlux () {
 class TasksPage extends Component {
   constructor () {
     super()
-    this.state = getStateFromFlux()
+    this.state = { ...getStateFromFlux(), isTaskModal: false }
     this._onChange = this._onChange.bind(this)
     this.handleStatusChange = this.handleStatusChange.bind(this)
+    this.handleAddTask = this.handleAddTask.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.handleTaskSubmit = this.handleTaskSubmit.bind(this)
   }
 
   componentWillMount () {
@@ -50,6 +53,20 @@ class TasksPage extends Component {
     })
   }
 
+  handleAddTask () {
+    this.setState({ isTaskModal: true })
+  }
+
+  handleClose () {
+    this.setState({ isTaskModal: false })
+  }
+
+  handleTaskSubmit (task) {
+    const taskListId = this.props.params.id
+    TasksActions.createTask({ taskListId, ...task })
+    this.setState({ isTaskModal: false })
+  }
+
   render () {
     return (
       <div className='TasksPage'>
@@ -63,19 +80,22 @@ class TasksPage extends Component {
         </div>
 
         <div className='TasksPage__tasks'>
-          <ul>
-            {
-              this.state.tasks.map(task =>
-                <Task
-                  key={task.id}
-                  text={task.text}
-                  isCompleted={task.isCompleted}
-                  onStatusChange={this.handleStatusChange.bind(null, task.id)}
-                />
-              )
-            }
-          </ul>
+          {
+            this.state.tasks.map(task =>
+              <Task
+                key={task.id}
+                text={task.text}
+                isCompleted={task.isCompleted}
+                onStatusChange={this.handleStatusChange.bind(null, task.id)}
+              />
+            )
+          }
         </div>
+        <TaskModal
+          isOpen={this.state.isTaskModal}
+          onSubmit={this.handleTaskSubmit}
+          onClose={this.handleClose}
+        />
       </div>
     )
   }

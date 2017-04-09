@@ -23,7 +23,7 @@ function getStateFromFlux () {
 class TaskListsPage extends Component {
   constructor () {
     super()
-    this.state = getStateFromFlux()
+    this.state = { ...getStateFromFlux(), isTaskListModal: false }
     this._onChange = this._onChange.bind(this)
     this.handleAddTaskList = this.handleAddTaskList.bind(this)
     this.handleClose = this.handleClose.bind(this)
@@ -31,7 +31,6 @@ class TaskListsPage extends Component {
   }
 
   componentWillMount () {
-    this.setState({ isTaskListModal: false })
     TaskListsActions.loadTaskLists()
   }
 

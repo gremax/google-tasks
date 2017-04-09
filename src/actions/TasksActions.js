@@ -40,6 +40,25 @@ const TasksActions = {
           error: error
         })
       })
+  },
+
+  createTask (params) {
+    api.insertTask({
+      taskListId: params.taskListId,
+      title: params.text
+    })
+      .then(data => {
+        AppDispatcher.dispatch({
+          type: AppConstants.TASK_CREATE_SUCCESS,
+          task: data
+        })
+      })
+      .catch(error => {
+        AppDispatcher.dispatch({
+          type: AppConstants.TASK_CREATE_FAIL,
+          error: error
+        })
+      })
   }
 }
 

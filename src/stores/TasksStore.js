@@ -61,6 +61,14 @@ AppDispatcher.register(function (action) {
       break
     }
 
+    case AppConstants.TASK_CREATE_SUCCESS: {
+      const newTask = formatTask(action.task)
+      _tasks.unshift(newTask)
+
+      TasksStore.emitChange()
+      break
+    }
+
     default: {
     }
   }

@@ -4,10 +4,10 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
-class TaskListModal extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { name: '' }
+class TaskModal extends Component {
+  constructor () {
+    super()
+    this.state = { text: '' }
     this.handleClose = this.handleClose.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleTextChange = this.handleTextChange.bind(this)
@@ -15,7 +15,7 @@ class TaskListModal extends Component {
 
   handleClose () {
     const { onClose } = this.props
-    this.setState({ name: '' })
+    this.setState({ text: '' })
 
     if (onClose) {
       onClose()
@@ -27,21 +27,21 @@ class TaskListModal extends Component {
 
     if (onSubmit) {
       onSubmit({
-        name: this.state.name
+        text: this.state.text
       })
     }
 
-    this.setState({ name: '' })
+    this.setState({ text: '' })
   }
 
   handleTextChange (e) {
     this.setState({
-      name: e.target.value
+      text: e.target.value
     })
   }
 
   render () {
-    const { name } = this.state
+    const { text } = this.state
     const { isOpen } = this.props
 
     return (
@@ -54,7 +54,7 @@ class TaskListModal extends Component {
           <FlatButton
             primary
             label='Submit'
-            disabled={!name}
+            disabled={!text}
             onTouchTap={this.handleSubmit}
           />
         ]}
@@ -66,14 +66,14 @@ class TaskListModal extends Component {
         <TextField
           fullWidth
           ref={c => this.taskInput = c}
-          value={name}
+          value={text}
           onChange={this.handleTextChange}
-          hintText='e.g. Books, Movies'
-          floatingLabelText='Enter task list name'
+          hintText='e.g. finish pdp'
+          floatingLabelText='Enter task name'
         />
       </Dialog>
     )
   }
 }
 
-export default TaskListModal
+export default TaskModal
