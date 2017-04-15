@@ -25,6 +25,7 @@ class TasksPage extends Component {
     this.handleAddTask = this.handleAddTask.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleTaskSubmit = this.handleTaskSubmit.bind(this)
+    this.handleTaskUpdate = this.handleTaskUpdate.bind(this)
   }
 
   componentWillMount () {
@@ -67,6 +68,14 @@ class TasksPage extends Component {
     this.setState({ isTaskModal: false })
   }
 
+  handleTaskUpdate (taskId, { text }) {
+    TasksActions.updateTask({
+      taskListId: this.props.params.id,
+      taskId: taskId,
+      text: text
+    })
+  }
+
   render () {
     return (
       <div className='TasksPage'>
@@ -87,6 +96,7 @@ class TasksPage extends Component {
                 text={task.text}
                 isCompleted={task.isCompleted}
                 onStatusChange={this.handleStatusChange.bind(null, task.id)}
+                onUpdate={this.handleTaskUpdate.bind(null, task.id)}
               />
             )
           }

@@ -7,7 +7,6 @@ const TasksActions = {
   loadTasks (taskListId) {
     api.listTasks(taskListId)
       .then(data => {
-        console.log(data)
         AppDispatcher.dispatch({
           type: AppConstants.TASKS_LOAD_SUCCESS,
           items: data.items || []
@@ -56,6 +55,27 @@ const TasksActions = {
       .catch(error => {
         AppDispatcher.dispatch({
           type: AppConstants.TASK_CREATE_FAIL,
+          error: error
+        })
+      })
+  },
+
+  updateTask (params) {
+    api.updateTask({
+      taskListId: params.taskListId,
+      taskId: params.taskId,
+      title: params.text
+    })
+      .then(data => {
+        AppDispatcher.dispatch({
+          type: AppConstants.TASK_UPDATE_SUCCESS,
+          task: data,
+          taskId: params.taskId
+        })
+      })
+      .catch(error => {
+        AppDispatcher.dispatch({
+          type: AppConstants.TASK_UPDATE_FAIL,
           error: error
         })
       })
