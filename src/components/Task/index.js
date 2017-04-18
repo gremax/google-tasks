@@ -18,6 +18,7 @@ class Task extends Component {
     this.handleEdit = this.handleEdit.bind(this)
     this.handleCancel = this.handleCancel.bind(this)
     this.handleSave = this.handleSave.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   handleCheck () {
@@ -36,6 +37,10 @@ class Task extends Component {
 
   handleSave () {
     this.saveTask()
+  }
+
+  handleDelete () {
+    this.props.onDelete(this.props.taskId)
   }
 
   focusInput () {
@@ -79,7 +84,7 @@ class Task extends Component {
         </div>
         <IconMenu iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}>
           <MenuItem onClick={this.handleEdit}>Edit</MenuItem>
-          <MenuItem>Delete</MenuItem>
+          <MenuItem onClick={this.handleDelete}>Delete</MenuItem>
         </IconMenu>
       </div>
     )

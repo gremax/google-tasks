@@ -69,6 +69,14 @@ AppDispatcher.register(function (action) {
       break
     }
 
+    case AppConstants.TASK_DELETE_SUCCESS: {
+      const removedTaskIndex = _tasks.findIndex(task => task.id === action.taskId)
+      _tasks.splice(removedTaskIndex, 1)
+
+      TasksStore.emitChange()
+      break
+    }
+
     default: {
     }
   }

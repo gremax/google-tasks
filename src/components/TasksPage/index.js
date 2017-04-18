@@ -26,6 +26,7 @@ class TasksPage extends Component {
     this.handleClose = this.handleClose.bind(this)
     this.handleTaskSubmit = this.handleTaskSubmit.bind(this)
     this.handleTaskUpdate = this.handleTaskUpdate.bind(this)
+    this.handleTaskDelete = this.handleTaskDelete.bind(this)
   }
 
   componentWillMount () {
@@ -76,6 +77,10 @@ class TasksPage extends Component {
     })
   }
 
+  handleTaskDelete (taskId) {
+    TasksActions.deleteTask(this.props.params.id, taskId)
+  }
+
   render () {
     return (
       <div className='TasksPage'>
@@ -93,10 +98,12 @@ class TasksPage extends Component {
             this.state.tasks.map(task =>
               <Task
                 key={task.id}
+                taskId={task.id}
                 text={task.text}
                 isCompleted={task.isCompleted}
                 onStatusChange={this.handleStatusChange.bind(null, task.id)}
                 onUpdate={this.handleTaskUpdate.bind(null, task.id)}
+                onDelete={this.handleTaskDelete.bind(null, task.id)}
               />
             )
           }
