@@ -34,6 +34,22 @@ const TaskListsActions = {
           error: error
         })
       })
+  },
+
+  loadTaskList (taskListId) {
+    api.showTaskList(taskListId)
+      .then(data => {
+        AppDispatcher.dispatch({
+          type: AppConstants.TASK_LIST_LOAD_SUCCESS,
+          taskList: data
+        })
+      })
+      .catch(error => {
+        AppDispatcher.dispatch({
+          type: AppConstants.TASK_LIST_LOAD_FAIL,
+          error: error
+        })
+      })
   }
 }
 

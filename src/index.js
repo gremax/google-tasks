@@ -12,6 +12,7 @@ import SessionStore from './stores/SessionStore'
 import {
   Router,
   Route,
+  Redirect,
   hashHistory
 } from 'react-router'
 
@@ -22,6 +23,7 @@ window.handleGoogleApiLoaded = () => {
 function renderApp () {
   ReactDOM.render(
     <Router history={hashHistory}>
+      <Redirect from='/' to='/signin' />
       <Route path='/' component={App}>
         <Route path='/signin' component={SigninPage} />
         <Route component={SignedInLayout} onEnter={requireAuth} >

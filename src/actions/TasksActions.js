@@ -99,7 +99,7 @@ const TasksActions = {
           error: error
         })
       })
-  },
+  }
 }
 
 export default TasksActions

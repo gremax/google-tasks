@@ -60,11 +60,11 @@ class Task extends Component {
     return (
       this.state.isEditing
       ? <div className='Task editing'>
-          <input
-            className='Task__input'
-            type='text'
-            defaultValue={this.props.text}
-            ref={c => this.input = c}
+        <input
+          className='Task__input'
+          type='text'
+          defaultValue={this.props.text}
+          ref={c => this.input = c}
           />
         <div className='Task__toolbar'>
           <div>

@@ -86,5 +86,15 @@ export default {
     return new Promise((resolve, reject) => {
       request.execute(response => resolve(response))
     })
+  },
+
+  showTaskList (taskListId) {
+    const request = gapi.client.tasks.tasklists.get({
+      tasklist: taskListId
+    })
+
+    return new Promise((resolve, reject) => {
+      request.execute(response => resolve(response))
+    })
   }
 }

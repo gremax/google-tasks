@@ -85,6 +85,7 @@ class TaskListsPage extends Component {
                     primaryText={list.name}
                     leftIcon={<FolderIcon />}
                     key={list.id}
+                    style={this.props.params.id === list.id ? {backgroundColor: '#ccc'} : null}
                     onClick={router.push.bind(null, `/lists/${list.id}`)}
                   />
                 )
