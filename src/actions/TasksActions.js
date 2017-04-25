@@ -5,6 +5,10 @@ import api from '../api'
 
 const TasksActions = {
   loadTasks (taskListId) {
+    AppDispatcher.dispatch({
+      type: AppConstants.TASKS_LOAD_REQUEST
+    })
+
     api.listTasks(taskListId)
       .then(data => {
         AppDispatcher.dispatch({
@@ -21,6 +25,12 @@ const TasksActions = {
   },
 
   updateTaskStatus (params) {
+    AppDispatcher.dispatch({
+      type: AppConstants.TASK_UPDATE_REQUEST,
+      taskId: params.taskId,
+      isCompleted: params.isCompleted
+    })
+
     api.updateTask({
       taskListId: params.taskListId,
       taskId: params.taskId,
@@ -61,6 +71,12 @@ const TasksActions = {
   },
 
   updateTask (params) {
+    AppDispatcher.dispatch({
+      type: AppConstants.TASK_UPDATE_REQUEST,
+      taskId: params.taskId,
+      text: params.text
+    })
+
     api.updateTask({
       taskListId: params.taskListId,
       taskId: params.taskId,

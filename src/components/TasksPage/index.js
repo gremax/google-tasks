@@ -14,6 +14,7 @@ import './styles.css'
 
 function getStateFromFlux () {
   return {
+    isLoadingTasks: TasksStore.isLoadingTasks(),
     tasks: TasksStore.getTasks(),
     taskList: TaskListsStore.getCurrentTaskList() || {}
   }
@@ -99,6 +100,8 @@ class TasksPage extends Component {
             </IconButton>
           </div>
         </div>
+
+        { this.state.isLoadingTasks ? 'Loading...' : null }
 
         <div className='TasksPage__tasks'>
           {
