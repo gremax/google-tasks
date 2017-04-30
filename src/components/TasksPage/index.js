@@ -15,6 +15,7 @@ import './styles.css'
 function getStateFromFlux () {
   return {
     isLoadingTasks: TasksStore.isLoadingTasks(),
+    error: TasksStore.getError(),
     tasks: TasksStore.getTasks(),
     taskList: TaskListsStore.getCurrentTaskList() || {}
   }
@@ -90,6 +91,14 @@ class TasksPage extends Component {
   }
 
   render () {
+    if (this.state.error) {
+      return (
+        <div className='TasksPage'>
+          {this.state.error}
+        </div>
+      )
+    }
+
     return (
       <div className='TasksPage'>
         <div className='TasksPage__header'>
