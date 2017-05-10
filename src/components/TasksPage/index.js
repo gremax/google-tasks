@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-
 import TasksStore from '../../stores/TasksStore'
 import TaskListsStore from '../../stores/TaskListsStore'
 import TasksActions from '../../actions/TasksActions'
 import TaskListsActions from '../../actions/TaskListsActions'
 import Task from '../Task'
 import TaskModal from '../TaskModal'
-
 import AddIcon from 'material-ui/svg-icons/content/add'
 import IconButton from 'material-ui/IconButton'
+import { bindAll } from 'lodash'
 
 import './styles.css'
 
@@ -25,13 +24,15 @@ class TasksPage extends Component {
   constructor () {
     super()
     this.state = { ...getStateFromFlux(), isTaskModal: false }
-    this._onChange = this._onChange.bind(this)
-    this.handleStatusChange = this.handleStatusChange.bind(this)
-    this.handleAddTask = this.handleAddTask.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleTaskSubmit = this.handleTaskSubmit.bind(this)
-    this.handleTaskUpdate = this.handleTaskUpdate.bind(this)
-    this.handleTaskDelete = this.handleTaskDelete.bind(this)
+    bindAll(this, [
+      '_onChange',
+      'handleStatusChange',
+      'handleAddTask',
+      'handleClose',
+      'handleTaskSubmit',
+      'handleTaskUpdate',
+      'handleTaskDelete'
+    ])
   }
 
   componentWillMount () {

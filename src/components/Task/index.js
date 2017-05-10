@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
@@ -7,6 +6,7 @@ import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
+import { bindAll } from 'lodash'
 
 import './styles.css'
 
@@ -14,11 +14,13 @@ class Task extends Component {
   constructor () {
     super()
     this.state = { isEditing: false }
-    this.handleCheck = this.handleCheck.bind(this)
-    this.handleEdit = this.handleEdit.bind(this)
-    this.handleCancel = this.handleCancel.bind(this)
-    this.handleSave = this.handleSave.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
+    bindAll(this, [
+      'handleCheck',
+      'handleEdit',
+      'handleSave',
+      'handleDelete',
+      'handleCancel'
+    ])
   }
 
   handleCheck () {

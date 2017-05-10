@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
-
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
+import { bindAll } from 'lodash'
 
 class TaskListModal extends Component {
   constructor (props) {
     super(props)
     this.state = { name: '' }
-    this.handleClose = this.handleClose.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleTextChange = this.handleTextChange.bind(this)
+    bindAll(this, [
+      'handleClose',
+      'handleSubmit',
+      'handleTextChange'
+    ])
   }
 
   handleClose () {

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import TaskListsStore from '../../stores/TaskListsStore'
 import TaskListsActions from '../../actions/TaskListsActions'
 import TaskListModal from '../TaskListModal'
-
 import { List, ListItem } from 'material-ui/List'
 import Subheader from 'material-ui/Subheader'
 import Divider from 'material-ui/Divider'
@@ -11,6 +10,7 @@ import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
 import FolderIcon from 'material-ui/svg-icons/file/folder'
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import ListIcon from 'material-ui/svg-icons/action/view-list'
+import { bindAll } from 'lodash'
 
 import './styles.css'
 
@@ -24,10 +24,12 @@ class TaskListsPage extends Component {
   constructor () {
     super()
     this.state = { ...getStateFromFlux(), isTaskListModal: false }
-    this._onChange = this._onChange.bind(this)
-    this.handleAddTaskList = this.handleAddTaskList.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleTaskListSubmit = this.handleTaskListSubmit.bind(this)
+    bindAll(this, [
+      '_onChange',
+      'handleClose',
+      'handleAddTaskList',
+      'handleTaskListSubmit'
+    ])
   }
 
   componentWillMount () {
