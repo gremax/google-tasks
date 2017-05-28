@@ -50,5 +50,13 @@ module.exports = {
         exclude: [/node_modules/, /public/]
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        CLIENT_ID: JSON.stringify(process.env.GOOGLE_CLIENT_ID)
+      }
+    })
+  ]
 }

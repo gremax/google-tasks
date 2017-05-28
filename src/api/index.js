@@ -1,4 +1,4 @@
-const CLIENT_ID = '238659955045-p41065ed9vr6jhbq549nqebjgq1ganfo.apps.googleusercontent.com'
+const CLIENT_ID = process.env.CLIENT_ID
 const SCOPE = [
   'https://www.googleapis.com/auth/tasks',
   'https://www.googleapis.com/auth/plus.me'
